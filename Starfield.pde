@@ -18,7 +18,7 @@ void setup() {
 void draw() {
   background(0);
 
-  int currentTime = millis();
+  int currentTime = System.currentTimeMillis();
   float elapsed = (currentTime - lastTime) / 1000.0;
   lastTime = currentTime;
 

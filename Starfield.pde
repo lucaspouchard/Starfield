@@ -1,28 +1,21 @@
-Particle[] dots;
+let dots = [];
 
-int lastTime = 0;
+function setup() {
+  createCanvas(500, 500);
 
-void setup() {
-  size(500, 500);
-  background(0);
-
-  dots = new Particle[4000];
-
-  for (int i = 0; i < dots.length; i++) {
+  for (let i = 0; i < 4000; i++) {
     dots[i] = new Particle();
   }
 
   dots[0] = new OddballParticle();
 }
 
-void draw() {
+function draw() {
   background(0);
 
-  int currentTime = System.currentTimeMillis();
-  float elapsed = (currentTime - lastTime) / 1000.0;
-  lastTime = currentTime;
+  let elapsed = deltaTime / 1000;
 
-  for (int i = 0; i < dots.length; i++) {
+  for (let i = 0; i < dots.length; i++) {
     dots[i].move(elapsed);
     dots[i].show();
   }
@@ -30,55 +23,49 @@ void draw() {
 
 
 class Particle {
-  double myX = 250;
-  double myY = 250;
+  constructor() {
+    this.myX = 250;
+    this.myY = 250;
 
-  double angle;
-  double myspeed;
+    this.angle = random(TWO_PI);
+    this.myspeed = random(1, 6);
 
-  int mycolor;
-
-  Particle() {
-    angle = Math.random() * Math.PI * 2;
-    myspeed = Math.random() * 5 + 1;
-
-    mycolor = color(
-      (int)(Math.random() * 255),
-      (int)(Math.random() * 255),
-      (int)(Math.random() * 255)
+    this.mycolor = color(
+      random(255),
+      random(255),
+      random(255)
     );
   }
 
-  void move(float elapsed) {
-    angle += Math.toRadians(30) * elapsed;
+  move(elapsed) {
+    this.angle += radians(30) * elapsed;
 
-    myX += Math.cos(angle) * myspeed;
-    myY += Math.sin(angle) * myspeed;
+    this.myX += cos(this.angle) * this.myspeed;
+    this.myY += sin(this.angle) * this.myspeed;
   }
 
-  void show() {
-    fill(mycolor);
+  show() {
+    fill(this.mycolor);
     noStroke();
-    ellipse((float)myX, (float)myY, 4, 4);
+    ellipse(this.myX, this.myY, 4, 4);
   }
 }
 
 
 class OddballParticle extends Particle {
 
-  OddballParticle() {
+  constructor() {
     super();
-    mycolor = color(255, 0, 0);
   }
 
-  void show() {
+  show() {
     fill(
-      (int)(Math.random() * 255),
-      (int)(Math.random() * 255),
-      (int)(Math.random() * 255)
+      random(255),
+      random(255),
+      random(255)
     );
 
     noStroke();
-    ellipse((float)myX, (float)myY, 21, 21);
+    ellipse(this.myX, this.myY, 21, 21);
   }
 }

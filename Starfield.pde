@@ -45,7 +45,7 @@ class Particle {
   }
 
   void move() {
-    angle += Math.toRadians(0.5);
+    angle += (Math.PI * 1/360);
 
     myX += Math.cos(angle) * myspeed;
     myY += Math.sin(angle) * myspeed;

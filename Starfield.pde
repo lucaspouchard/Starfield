@@ -1,7 +1,5 @@
 Particle[] dots;
 
-int lastTime = 0;
-
 void setup() {
   size(500, 500);
   background(0);
@@ -18,18 +16,15 @@ void setup() {
 void draw() {
   background(0);
 
-  int currentTime = ();
-  float elapsed = (currentTime - lastTime) / 1000.0;
-  lastTime = currentTime;
-
   for (int i = 0; i < dots.length; i++) {
-    dots[i].move(elapsed);
+    dots[i].move();
     dots[i].show();
-  }
+}
 }
 
 
 class Particle {
+
   double myX = 250;
   double myY = 250;
 
@@ -46,11 +41,11 @@ class Particle {
       (int)(Math.random() * 255),
       (int)(Math.random() * 255),
       (int)(Math.random() * 255)
-    );
+  );
   }
 
-  void move(float elapsed) {
-    angle += Math.toRadians(30) * elapsed;
+  void move() {
+    angle += Math.toRadians(0.5);
 
     myX += Math.cos(angle) * myspeed;
     myY += Math.sin(angle) * myspeed;
@@ -60,14 +55,17 @@ class Particle {
     fill(mycolor);
     noStroke();
     ellipse((float)myX, (float)myY, 4, 4);
-  }
+}
 }
 
 
 class OddballParticle extends Particle {
 
   OddballParticle() {
-    super();
+    myX = 250;
+    myY = 250;
+    angle = Math.random() * Math.PI * 2;
+    myspeed = Math.random() * 5 + 1;
     mycolor = color(255, 0, 0);
   }
 
@@ -81,4 +79,4 @@ class OddballParticle extends Particle {
     noStroke();
     ellipse((float)myX, (float)myY, 21, 21);
   }
-}
+      }

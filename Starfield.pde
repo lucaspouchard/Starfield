@@ -35,7 +35,7 @@ class Particle {
 
   Particle() {
     angle = Math.random() * Math.PI * 2;
-    myspeed = Math.random() * 5 + 1;
+    myspeed = Math.random() * 5;
 
     mycolor = color(
       (int)(Math.random() * 255),
@@ -65,7 +65,7 @@ class OddballParticle extends Particle {
     myX = 250;
     myY = 250;
     angle = Math.random() * Math.PI * 2;
-    myspeed = Math.random() * 5 + 1;
+    myspeed = Math.random() * 3;
     mycolor = color(255, 0, 0);
   }
 
